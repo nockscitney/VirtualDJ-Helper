@@ -1,0 +1,22 @@
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\obj\Debug\VDJ_Helper.csprojAssemblyReference.cache
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\obj\Debug\MainWindow.g.cs
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\obj\Debug\App.g.cs
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\obj\Debug\Virtual DJ Helper_MarkupCompile.cache
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\obj\Debug\Virtual DJ Helper_MarkupCompile.lref
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\bin\Debug\Virtual DJ Helper.exe.config
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\bin\Debug\Virtual DJ Helper.exe
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\bin\Debug\Virtual DJ Helper.pdb
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\obj\Debug\MainWindow.baml
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\obj\Debug\Virtual DJ Helper.g.resources
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\obj\Debug\NickScotney.Internal.VDJ.VDJ_Helper.Properties.Resources.resources
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\obj\Debug\VDJ_Helper.csproj.GenerateResource.cache
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\obj\Debug\VDJ_Helper.csproj.CoreCompileInputs.cache
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\obj\Debug\Virtual DJ Helper.exe
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\obj\Debug\Virtual DJ Helper.pdb
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\obj\Debug\VDJ_Helper.csproj.CopyComplete
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\bin\Debug\VirtualDJHelperLogicLibrary.dll
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\bin\Debug\VirtualDJHelperLogicLibrary.pdb
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\obj\Debug\DataGrid.g.cs
+C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\VDJ_Helper\obj\Debug\DataGrid.baml
