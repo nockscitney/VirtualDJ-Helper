@@ -94,6 +94,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Song.Scan.Bpm}" Header="BPM" />
                     <DataGridTextColumn Binding="{Binding Song.Scan.Key}" Header="Key" />
+                    <DataGridTextColumn Binding="{Binding Song.Scan.MIKKey}" Header="MIK Key" />
                     <DataGridTextColumn Binding="{Binding Song.Infos.TrackLength}" Header="Track Length" />
                     <DataGridTextColumn Binding="{Binding Song.Tags.Author}" Header="Author" />
                     <DataGridTextColumn Binding="{Binding Song.Tags.Title}" Header="Title" />

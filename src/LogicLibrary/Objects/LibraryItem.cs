@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 //  Added
+using System.Collections;
 using System.Globalization;
 //  Newtonsoft
 using Newtonsoft.Json;
@@ -100,6 +98,8 @@ namespace NickScotney.Internal.VDJ.LogicLibrary.Objects
 
     public partial class Scan
     {
+        Hashtable mikHash;
+
         [JsonProperty("@Version")]
         [JsonConverter(typeof(ParseStringConverter))]
         public long Version { get; set; }
@@ -116,9 +116,54 @@ namespace NickScotney.Internal.VDJ.LogicLibrary.Objects
         [JsonProperty("@Key")]
         public string Key { get; set; }
 
+        public string MIKKey
+        {
+            get
+            {
+                return mikHash[Key].ToString();
+            }
+        }
+
         [JsonProperty("@Flag")]
         [JsonConverter(typeof(ParseStringConverter))]
         public long Flag { get; set; }
+
+        public Scan()
+            : base()
+        {
+            mikHash = new Hashtable();
+
+            mikHash.Add("Abm", "01A");
+            mikHash.Add("G#m", "01A");
+            mikHash.Add("B", "01B");
+            mikHash.Add("Ebm", "02A");
+            mikHash.Add("F#", "02B");
+            mikHash.Add("Bbm", "03A");
+            mikHash.Add("A#m", "03A");
+            mikHash.Add("Db", "03B");
+            mikHash.Add("C#", "03B");
+            mikHash.Add("Fm", "04A");
+            mikHash.Add("G#", "04B");
+            mikHash.Add("Ab", "04B");
+            mikHash.Add("Cm", "05A");
+            mikHash.Add("Eb", "05B");
+            mikHash.Add("Gm", "06A");
+            mikHash.Add("Bb", "06B");
+            mikHash.Add("A#", "06B");
+            mikHash.Add("Dm", "07A");
+            mikHash.Add("F", "07B");
+            mikHash.Add("Am", "08A");
+            mikHash.Add("C", "08B");
+            mikHash.Add("Em", "09A");
+            mikHash.Add("G", "09B");
+            mikHash.Add("Bm", "10A");
+            mikHash.Add("D", "10B");
+            mikHash.Add("F#m", "11A");
+            mikHash.Add("A", "11B");
+            mikHash.Add("C#m", "12A");
+            mikHash.Add("E", "12B");
+
+        }
     }
 
     public partial class Tags
