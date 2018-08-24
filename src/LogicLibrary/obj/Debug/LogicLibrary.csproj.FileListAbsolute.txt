@@ -1,9 +1,0 @@
-C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\LogicLibrary\obj\Debug\LogicLibrary.csprojAssemblyReference.cache
-C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\LogicLibrary\obj\Debug\LogicLibrary.csproj.CoreCompileInputs.cache
-C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\LogicLibrary\bin\Debug\Newtonsoft.Json.dll
-C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\LogicLibrary\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\LogicLibrary\obj\Debug\LogicLibrary.csproj.CopyComplete
-C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\LogicLibrary\bin\Debug\VirtualDJHelperLogicLibrary.dll
-C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\LogicLibrary\bin\Debug\VirtualDJHelperLogicLibrary.pdb
-C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\LogicLibrary\obj\Debug\VirtualDJHelperLogicLibrary.dll
-C:\Users\Nick\Documents\Visual Studio 2017\Projects\VDJ_Helper\LogicLibrary\obj\Debug\VirtualDJHelperLogicLibrary.pdb
