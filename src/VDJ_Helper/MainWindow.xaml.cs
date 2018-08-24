@@ -1,30 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 //  Added
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using System.Web;
 using System.Windows.Threading;
-using System.Xml;
 //  Logic
 using NickScotney.Internal.VDJ.LogicLibrary.Controllers;
 using NickScotney.Internal.VDJ.LogicLibrary.Objects;
-//  Newtonsoft
-using Newtonsoft.Json;
 
 namespace NickScotney.Internal.VDJ.VDJ_Helper
 {
@@ -98,6 +86,7 @@ namespace NickScotney.Internal.VDJ.VDJ_Helper
             clockTimer.Start();
         }
 
+        //  Create the filewatcher, which will watch for changes in the VDJ History folder
         void HistoryMonitor()
         {
             FileSystemWatcher fsw = new FileSystemWatcher();
@@ -111,6 +100,7 @@ namespace NickScotney.Internal.VDJ.VDJ_Helper
         }
 
         //  Method taken from https://stackoverflow.com/questions/21739242/filestream-and-a-filesystemwatcher-in-c-weird-issue-process-cannot-access-the
+        //  This will wait for the file to be closed before trying to read it, to prevent file opened exceptions
         bool IsFileClosed(string filepath, bool wait)
         {
             bool fileClosed = false;
@@ -143,6 +133,7 @@ namespace NickScotney.Internal.VDJ.VDJ_Helper
             return fileClosed;
         }
 
+        //  Routine which will load the track data, and add them to the data grid, via a group
         void LoadTracks()
         {
             if (cmbBxLibraries.SelectedIndex > 0)
@@ -154,6 +145,7 @@ namespace NickScotney.Internal.VDJ.VDJ_Helper
             }
         }
 
+        //  Routine which is used to scan each logical drive and check to see if there is a virtual dj folder in the root. Id there is, a library exists on the drive, so add it to the combo box
         void ScanDrives()
         {
             //  Clear the combo box
@@ -165,10 +157,12 @@ namespace NickScotney.Internal.VDJ.VDJ_Helper
             
             //  Set a default option here
             cmbBxLibraries.Items.Add("Select Library");
+            //  Set the index of the combobox to 0
             cmbBxLibraries.SelectedIndex = 0;
 
             foreach (DriveInfo drive in DriveInfo.GetDrives())
             {
+                //  Check to see if a database exists on the drive
                 if (File.Exists(String.Concat(drive.RootDirectory.Root, @"VirtualDJ\database.xml")))
                 {
                     //  Add the drive to the combo box

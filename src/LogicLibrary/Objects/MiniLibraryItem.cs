@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿///
+/// THIS IS A TEST CLASS
+/// 
+/// This class was only creaeted to test out nested classes within the datagrid binding and should therefore be ignored
+///
 namespace NickScotney.Internal.VDJ.LogicLibrary.Objects
 {
     public class MiniLibraryItem

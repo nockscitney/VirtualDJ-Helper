@@ -1,4 +1,7 @@
-﻿<Window x:Class="NickScotney.Internal.VDJ.VDJ_Helper.DataGrid"
+﻿<!-- 
+    This window is used as a test window to test datagrid implementations and servers no purpose to the projects
+-->
+    <Window x:Class="NickScotney.Internal.VDJ.VDJ_Helper.DataGrid"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
