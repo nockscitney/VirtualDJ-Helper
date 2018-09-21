@@ -70,6 +70,17 @@ namespace NickScotney.Internal.VDJ.LogicLibrary.Objects
         [JsonProperty("@FirstSeen")]
         [JsonConverter(typeof(ParseStringConverter))]
         public long FirstSeen { get; set; }
+        public DateTime FirstSeen2 { get { return DateTimeOffset.FromUnixTimeSeconds(FirstSeen).DateTime; } }
+
+        [JsonProperty("@LastPlay")]
+        [JsonConverter(typeof(ParseStringConverter))]
+        public long LastPlay { get; set; }
+
+        public DateTime LastPlay2 { get { return DateTimeOffset.FromUnixTimeSeconds(LastPlay).DateTime; } }
+
+        [JsonProperty("@PlayCount")]
+        [JsonConverter(typeof(ParseStringConverter))]
+        public long PlayCount { get; set; }
 
         [JsonProperty("@Bitrate")]
         [JsonConverter(typeof(ParseStringConverter))]
@@ -106,6 +117,7 @@ namespace NickScotney.Internal.VDJ.LogicLibrary.Objects
 
         [JsonProperty("@Bpm")]
         public string Bpm { get; set; }
+        public int CalculatedBPM { get => (int)Math.Round(60 / Decimal.Parse(Bpm), 2); }
 
         [JsonProperty("@AltBpm")]
         public string AltBpm { get; set; }
@@ -162,7 +174,6 @@ namespace NickScotney.Internal.VDJ.LogicLibrary.Objects
             mikHash.Add("A", "11B");
             mikHash.Add("C#m", "12A");
             mikHash.Add("E", "12B");
-
         }
     }
 

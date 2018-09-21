@@ -13,9 +13,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <!--<RowDefinition/>
-            <RowDefinition/>-->
+            <!--<RowDefinition/>-->
             <RowDefinition/>
+            <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -65,9 +65,8 @@
                     </ComboBox.Style>
                 </ComboBox>
                 <Button Content="Refresh Libraries"/>
-                <Button Content="Refresh Library List"/>
-                <CheckBox Content="Only Show Scanned Tracks"></CheckBox>                
-                <CheckBox Content="Suggest 'Mixed In Key'"></CheckBox>
+                <Button x:Name="btnRefreshLibrary" Content="Refresh Library List" Click="btnRefreshLibrary_Click"/>
+                <CheckBox x:Name="chkBxNewTracks" Content="Only Show New Tracks" Checked="chkBxNewTracks_Checked" Unchecked="chkBxNewTracks_Unchecked" IsEnabled="False"></CheckBox>
             </StackPanel>
             <DataGrid Grid.Row="1" x:Name="dgTrackList" AutoGenerateColumns="False" AlternatingRowBackground="LightGray" CanUserAddRows="False" CanUserDeleteRows="False">
                 <DataGrid.GroupStyle>
@@ -77,13 +76,16 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type GroupItem}">
-                                            <StackPanel>
-                                                <StackPanel Orientation="Horizontal" Margin="10">
-                                                    <TextBlock Text="{Binding Name, StringFormat=Folder: {0}}" Margin="30,0,0,0" FontWeight="Bold" />
-                                                    <TextBlock Text="{Binding ItemCount, StringFormat=Folder Track Count: {0}}" Margin="30,0,0,0" FontWeight="Bold" />
-                                                </StackPanel>
+                                            <Expander x:Name="exp" IsExpanded="False" Background="White" Foreground="Black">
+                                                <Expander.Header>
+                                                    <!--<TextBlock Text="{Binding Title}"/>-->
+                                                    <StackPanel Orientation="Horizontal" Margin="10">
+                                                        <TextBlock Text="{Binding Name, StringFormat=Folder: {0}}" Margin="30,0,0,0" FontWeight="Bold" />
+                                                        <TextBlock Text="{Binding ItemCount, StringFormat=Folder Track Count: {0}}" Margin="30,0,0,0" FontWeight="Bold" />
+                                                    </StackPanel>
+                                                </Expander.Header>
                                                 <ItemsPresenter/>
-                                            </StackPanel>
+                                            </Expander>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
@@ -92,17 +94,25 @@
                     </GroupStyle>
                 </DataGrid.GroupStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Song.Scan.Bpm}" Header="BPM" />
+                    <DataGridTextColumn Binding="{Binding Song.Scan.CalculatedBPM}" Header="BPM" />
                     <DataGridTextColumn Binding="{Binding Song.Scan.Key}" Header="Key" />
                     <DataGridTextColumn Binding="{Binding Song.Scan.MIKKey}" Header="MIK Key" />
                     <DataGridTextColumn Binding="{Binding Song.Infos.TrackLength}" Header="Track Length" />
                     <DataGridTextColumn Binding="{Binding Song.Tags.Author}" Header="Author" />
                     <DataGridTextColumn Binding="{Binding Song.Tags.Title}" Header="Title" />
                     <DataGridTextColumn Binding="{Binding Song.Tags.Remix}" Header="Remix" />
-                    <DataGridTextColumn Binding="{Binding Song.FolderPath}" Header="Folder" />
-                    <DataGridTextColumn Binding="{Binding Song.FilePath}" Header="File Path" />
+                    <DataGridTextColumn Binding="{Binding Song.Infos.PlayCount}" Header="Time Played" />
+                    <DataGridTextColumn Binding="{Binding Song.Infos.FirstSeen2}" Header="First Seen" />
+                    <DataGridTextColumn Binding="{Binding Song.Infos.LastPlayed2}" Header="Last Played" />
                 </DataGrid.Columns>
             </DataGrid>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <StackPanel Margin="10">
+                <Label FontWeight="Bold">Session History</Label>
+                <TextBox x:Name="txtBxSessionHistory" Height="100" IsReadOnly="True" />
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

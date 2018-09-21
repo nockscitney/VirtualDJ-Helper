@@ -18,6 +18,7 @@ namespace NickScotney.Internal.VDJ.VDJ_Helper
 {
     delegate void CallBackToUIThread(FileSystemEventArgs e);
 
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -25,11 +26,18 @@ namespace NickScotney.Internal.VDJ.VDJ_Helper
     {
         DispatcherTimer clockTimer;
         List<DriveInfo> drives;
+        ListCollectionView masterCollectionView;
+        string currentTrack;
 
         public ObservableCollection<LibraryItem> LibraryList = null;
         public string CurrentTrack
         {
-            set { lblCurrentTrack.Content = value; }
+            get => currentTrack;
+            set
+            {
+                currentTrack = value;
+                lblCurrentTrack.Content = value;
+            }
         }
 
         public MainWindow()
@@ -51,12 +59,29 @@ namespace NickScotney.Internal.VDJ.VDJ_Helper
             ScanDrives();
         }
 
+        private void btnRefreshLibrary_Click(object sender, RoutedEventArgs e) => LoadTracks(true);
 
-        private void Button_Click(object sender, RoutedEventArgs e) => LoadTracks();
+
+        private void chkBxNewTracks_Checked(object sender, RoutedEventArgs e) => FilterUnPlayed();
+
+        private void chkBxNewTracks_Unchecked(object sender, RoutedEventArgs e) => LoadTracks();
 
         private void ClockTimer_Tick(object sender, EventArgs e) => lblCurrentTime.Content = String.Format("{0:00}:{1:00}:{2:00}", DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
-        private void cmbBxLibraries_SelectionChanged(object sender, SelectionChangedEventArgs e) => LoadTracks();
 
+        private void cmbBxLibraries_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((bool)chkBxNewTracks.IsChecked)
+            {
+                chkBxNewTracks.Checked -= chkBxNewTracks_Checked;
+                chkBxNewTracks.IsChecked = false;
+                chkBxNewTracks.Checked += chkBxNewTracks_Checked;
+            }
+
+            chkBxNewTracks.IsEnabled = cmbBxLibraries.SelectedIndex > 0;
+            LoadTracks(true);
+        }
+
+        private void fsw_Changed(object sender, FileSystemEventArgs e) => this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new CallBackToUIThread(NotifyUIThreadOfChange), e);
 
         public void NotifyUIThreadOfChange(FileSystemEventArgs e)
         {
@@ -69,12 +94,13 @@ namespace NickScotney.Internal.VDJ.VDJ_Helper
                 if (lastLine.Substring(2, 1) != ":")
                     return;
 
-                CurrentTrack = lastLine.Substring(8);
+                if (CurrentTrack != lastLine.Substring(8))
+                {
+                    CurrentTrack = lastLine.Substring(8);
+                    txtBxSessionHistory.Text += String.IsNullOrEmpty(txtBxSessionHistory.Text) ? $"{DateTime.Now} : {currentTrack}" : $"{Environment.NewLine}{DateTime.Now} : {currentTrack}";
+                }
             }
         }
-
-
-        private void fsw_Changed(object sender, FileSystemEventArgs e) => this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new CallBackToUIThread(NotifyUIThreadOfChange), e);
 
 
 
@@ -84,6 +110,17 @@ namespace NickScotney.Internal.VDJ.VDJ_Helper
             clockTimer.Tick += new EventHandler(ClockTimer_Tick);
             clockTimer.Interval = new TimeSpan(0, 0, 1);
             clockTimer.Start();
+        }
+
+        void FilterUnPlayed()
+        {
+            ICollectionView cv = CollectionViewSource.GetDefaultView(dgTrackList.ItemsSource);
+
+            cv.Filter = o =>
+            {
+                LibraryItem li = o as LibraryItem;
+                return (li.Song.Infos.PlayCount == 0);
+            };
         }
 
         //  Create the filewatcher, which will watch for changes in the VDJ History folder
@@ -134,14 +171,29 @@ namespace NickScotney.Internal.VDJ.VDJ_Helper
         }
 
         //  Routine which will load the track data, and add them to the data grid, via a group
-        void LoadTracks()
+        void LoadTracks(bool newLibrary = false)
         {
             if (cmbBxLibraries.SelectedIndex > 0)
             {
-                ListCollectionView collectionView = new ListCollectionView(LibraryController.ReadLibrary(String.Concat(drives[cmbBxLibraries.SelectedIndex - 1].RootDirectory.Root, @"VirtualDJ\database.xml")));
-                collectionView.GroupDescriptions.Add(new PropertyGroupDescription("Song.FolderPath"));
-                collectionView.SortDescriptions.Add(new SortDescription("Song.FolderPath", ListSortDirection.Ascending));
+                ListCollectionView collectionView;
+
+                //  This will re-load the data from the library
+                if (newLibrary)
+                {
+                    collectionView = new ListCollectionView(LibraryController.ReadLibrary(String.Concat(drives[cmbBxLibraries.SelectedIndex - 1].RootDirectory.Root, @"VirtualDJ\database.xml")));
+                    masterCollectionView = collectionView;
+
+                    collectionView.GroupDescriptions.Add(new PropertyGroupDescription("Song.FolderPath"));
+                    collectionView.SortDescriptions.Add(new SortDescription("Song.FolderPath", ListSortDirection.Ascending));
+                }
+                else
+                    collectionView = masterCollectionView;
+
                 dgTrackList.ItemsSource = collectionView;
+                dgTrackList.Items.Refresh();
+
+                if ((bool)chkBxNewTracks.IsChecked)
+                    FilterUnPlayed();
             }
         }
 
@@ -152,9 +204,9 @@ namespace NickScotney.Internal.VDJ.VDJ_Helper
             cmbBxLibraries.Items.Clear();
 
             //  Clear the drives list if it's not null
-            if(drives != null)
+            if (drives != null)
                 drives.Clear();
-            
+
             //  Set a default option here
             cmbBxLibraries.Items.Add("Select Library");
             //  Set the index of the combobox to 0
@@ -176,7 +228,7 @@ namespace NickScotney.Internal.VDJ.VDJ_Helper
                     drives.Add(drive);
                 }
             }
-            
+
         }
     }
 }
