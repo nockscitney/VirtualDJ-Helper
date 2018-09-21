@@ -9,3 +9,10 @@ The project requires the use of the "Newtonsoft" JSON library, which isn't dstri
 
 ## Current Version
 I am yet to create an "exe" version of the program to download, however you can pull down the project from GIT and compile it yourself should you wish (using Visual Studio)
+
+## Latest Features
+(09/21/2018)
+- Added in a new section at the bottom which will display your current session history (while the app is open)
+- Removed the File Path fields on the track listings and replaces with "Play Count", "First Seen" and "Last Played" fields
+- Added "Expanders" to the group headers so it's now possible to minimize groups you don't want to see
+- Added a checkbox to filter the track lists and only show tracks that haven't been played
