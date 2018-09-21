@@ -16,3 +16,4 @@ I am yet to create an "exe" version of the program to download, however you can 
 - Removed the File Path fields on the track listings and replaces with "Play Count", "First Seen" and "Last Played" fields
 - Added "Expanders" to the group headers so it's now possible to minimize groups you don't want to see
 - Added a checkbox to filter the track lists and only show tracks that haven't been played
+- Added a conversion for the VDJ stored BPM value to show the proper track BPM
