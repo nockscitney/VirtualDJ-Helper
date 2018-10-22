@@ -62,9 +62,7 @@ namespace NickScotney.Internal.VDJ.VDJ_Helper
         private void btnRefreshLibrary_Click(object sender, RoutedEventArgs e) => LoadTracks(true);
 
 
-        private void chkBxNewTracks_Checked(object sender, RoutedEventArgs e) => FilterUnPlayed();
-
-        private void chkBxNewTracks_Unchecked(object sender, RoutedEventArgs e) => LoadTracks();
+        private void chkBxNewTracks_CheckChanged(object sender, RoutedEventArgs e) => FilterByPlayCountPlayed();
 
         private void ClockTimer_Tick(object sender, EventArgs e) => lblCurrentTime.Content = String.Format("{0:00}:{1:00}:{2:00}", DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
 
@@ -72,9 +70,9 @@ namespace NickScotney.Internal.VDJ.VDJ_Helper
         {
             if ((bool)chkBxNewTracks.IsChecked)
             {
-                chkBxNewTracks.Checked -= chkBxNewTracks_Checked;
+                chkBxNewTracks.Checked -= chkBxNewTracks_CheckChanged;
                 chkBxNewTracks.IsChecked = false;
-                chkBxNewTracks.Checked += chkBxNewTracks_Checked;
+                chkBxNewTracks.Checked += chkBxNewTracks_CheckChanged;
             }
 
             chkBxNewTracks.IsEnabled = cmbBxLibraries.SelectedIndex > 0;
@@ -112,15 +110,24 @@ namespace NickScotney.Internal.VDJ.VDJ_Helper
             clockTimer.Start();
         }
 
-        void FilterUnPlayed()
+        void FilterByPlayCountPlayed()
         {
-            ICollectionView cv = CollectionViewSource.GetDefaultView(dgTrackList.ItemsSource);
+            //ICollectionView cv = CollectionViewSource.GetDefaultView(dgTrackList.ItemsSource);
 
-            cv.Filter = o =>
+            if (chkBxNewTracks.IsChecked == true)
             {
-                LibraryItem li = o as LibraryItem;
-                return (li.Song.Infos.PlayCount == 0);
-            };
+                //cv.Filter = o =>
+                dgTrackList.Items.Filter = o =>
+                {
+                    LibraryItem li = o as LibraryItem;
+                    return (li.Song.Infos.PlayCount == 0);
+                };
+            }
+            else
+            {
+                dgTrackList.Items.Filter = null;
+                //dgTrackList.Items.Refresh();
+            }
         }
 
         //  Create the filewatcher, which will watch for changes in the VDJ History folder
@@ -193,7 +200,7 @@ namespace NickScotney.Internal.VDJ.VDJ_Helper
                 dgTrackList.Items.Refresh();
 
                 if ((bool)chkBxNewTracks.IsChecked)
-                    FilterUnPlayed();
+                    FilterByPlayCountPlayed();
             }
         }
 

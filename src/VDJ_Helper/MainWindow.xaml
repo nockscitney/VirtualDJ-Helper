@@ -66,7 +66,7 @@
                 </ComboBox>
                 <Button Content="Refresh Libraries"/>
                 <Button x:Name="btnRefreshLibrary" Content="Refresh Library List" Click="btnRefreshLibrary_Click"/>
-                <CheckBox x:Name="chkBxNewTracks" Content="Only Show New Tracks" Checked="chkBxNewTracks_Checked" Unchecked="chkBxNewTracks_Unchecked" IsEnabled="False"></CheckBox>
+                <CheckBox x:Name="chkBxNewTracks" Content="Only Show New Tracks" Checked="chkBxNewTracks_CheckChanged" Unchecked="chkBxNewTracks_CheckChanged" IsEnabled="False"></CheckBox>
             </StackPanel>
             <DataGrid Grid.Row="1" x:Name="dgTrackList" AutoGenerateColumns="False" AlternatingRowBackground="LightGray" CanUserAddRows="False" CanUserDeleteRows="False">
                 <DataGrid.GroupStyle>
